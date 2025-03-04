@@ -7,22 +7,28 @@ class Vendeur{
     public function __construct($nom){
         $this->nom = $nom;
     }
-    // Méthode pour réparer une voiture. C'est le mécanicien qui vient changer l'état
-    public function reparerVoiture(Voiture $voiture){
-        echo "Le vendeur " .$this->nom. " répare la voiture : ".$voiture->getMarque() . "<br>";
-        $voiture->setEtat("réparée");
-        $voiture->save();
+    // Méthode pour créer un produit. C'est le vendeur qui vient changer l'état
+    public function create(Product $product){
+        echo "Le vendeur " .$this->nom. " enregistre le produit : ".$product->getNom() . "<br>";
+        $product->setEtat("enregistré");
+        $product->save();
     }
 
-    // Fonction déclarer la panne - BB
-    public function declarerPanne(Voiture $voiture){
-        echo "Le mécanicien " . $this->nom . " déclare en panne la voiture : " . $voiture->getMarque() . "<br>";
-        $voiture->setEtat("en panne");
-        $voiture->save();
+    // Fonction update product - BB
+    public function update(Product $product){
+        echo "Le vendeur" . $this->stock . " met à jour le produit : " . $product->getStock() . "<br>";
+        $product->setEtat("à jour");
+        $product->save();
+    }
+    // Fonction delete product - BB
+    public function delete(Product $product){
+        echo "Le vendeur" . $this->stock . " supprime le produit : " . $product->getStock() . "<br>";
+        $product->setEtat("supprimé");
+        $product->save();
     }
 
-    // Fonction afficher nom mécanicien
+    // Fonction afficher nom vendeur
     public function afficherNom(){
-        echo "Mécanicien : " .$this->nom ."<br>";
+        echo "Vendeur : " .$this->nom ."<br>";
     }
 }

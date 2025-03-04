@@ -7,7 +7,8 @@
 require_once __DIR__ . "/../models/Product.php";
 require_once __DIR__ . "/../models/Vendeur.php";
 
-class ProductController {
+class ProductController
+{
     /**
      * function details
      * Afficher détails du produit
@@ -15,11 +16,12 @@ class ProductController {
      * @param int $id
      */
 
-    public function details($id){
+    public function details($id)
+    {
         // Chargement du pdt
         $product = Product::loadById($id);
 
-        if(!$product){
+        if (!$product) {
             echo "Produit non trouvé";
             return;
         }
@@ -30,11 +32,12 @@ class ProductController {
 
 //----------------------------------------------------------------------------------------------------------------------
 // Creation Produit -BB
-    public function create($id){
+    public function create($id)
+    {
         // Chargement du produit
         $product = Product::loadById($id);
 
-        if(!$product){
+        if (!$product) {
             echo "Produit non en rayon";
             return;
         }
@@ -46,15 +49,16 @@ class ProductController {
 
         // Inclusion de la vue
         include __DIR__ . '/../views/ProductDetails.php';
-    }}
+    }
 
 //----------------------------------------------------------------------------------------------------------------------
 // Supprimer pdt - BB
-    public function delete($id){
-      // Chargement du produit
-      $product = Product::loadById($id);
+    public function delete($id)
+    {
+        // Chargement du produit
+        $product = Product::loadById($id);
 
-        if(!$product){
+        if (!$product) {
             echo "produit non en rayon";
             return;
         }
@@ -68,16 +72,18 @@ class ProductController {
 //----------------------------------------------------------------------------------------------------------------------
 // Mettre à jour le produit
 
-public function update($id)
-{
-    // Créer une nouvelle instance de vendeur
-    $vendeur = new Vendeur('Mao');
-    // Chargement du produit
-    $product = Product::loadById($id);
+    public function update($id)
+    {
 
-    // vendeur met à jour le pdt
-    $message = $vendeur->update($product);
+        // Créer une nouvelle instance de vendeur
+        $vendeur = new Vendeur('Mao');
+        // Chargement du produit
+        $product = Product::loadById($id);
 
-    // Inclusion de la vue
-    include __DIR__ . "/../views/ProductDetails.php";
+        // vendeur met à jour le pdt
+        $message = $vendeur->update($product);
+
+        // Inclusion de la vue
+        include __DIR__ . "/../views/ProductDetails.php";
+    }
 }
