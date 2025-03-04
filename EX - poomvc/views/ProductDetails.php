@@ -1,29 +1,27 @@
 <?php
 include 'header.php';
 ?>
-
-
-
-<H2>Détails de la voiture</H2>
+<H2>Détails du produit</H2>
 <?php
 
-if(!isset($voiture)){
-    echo"<p> Erreur : voiture non trouvée</p>";
+if(!isset($product)){
+    echo"<p> Erreur : Produit non trouvé</p>";
     include 'footer.php';
     exit;
 }
 ?>
-<p><?php echo htmlspecialchars($voiture->getDetails());?></p>
+<p><?php echo htmlspecialchars($product->getDetails());?></p>
 <?php
 // si il y a un message alors on l'affiche
 if(isset($message)){
-    echo "<p style='color/green;'>".htmlspecialchars($message)."</p>";
+    echo "<p style='color:green;'>".htmlspecialchars($message)."</p>";
 }
 ?>
 
 <p>
-    <a href="index.php?action=reparer&id=<?php echo $voiture->getId();?>">Réparer la voiture</a>
-    <a href="index.php?action=panne&id=<?php echo $voiture->getId();?>">Déclarer en Panne</a>
+    <a href="index.php?action=create&id=<?php echo $product->getId();?>">Créer le produit</a>
+    <a href="index.php?action=update&id=<?php echo $product->getId();?>">Mettre à jour le produit</a>
+    <a href="index.php?action=delete&id=<?php echo $product->getId();?>">Supprimer le produit</a>
 </p>
 
 <?php

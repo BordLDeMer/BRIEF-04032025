@@ -23,7 +23,9 @@ class Database
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die ("Erreur : " . $e->getMessage());
+            // Pour une gestion des erreurs plus élégante et sécurisée
+            error_log('Erreur de connexion BDD : ' . $e->getMessage()); // Enregistrer l'erreur dans un log
+            die("Une erreur est survenue lors de la connexion à la base de données.");
         }
     }
     public static function getInstance(){

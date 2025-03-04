@@ -12,7 +12,7 @@ session_start();
 
 // Inclusion des controllers
 
-require_once "controllers/VoitureController.php";
+require_once "controllers/ProductController.php";
 
 // Récupération paramètres URL
 
@@ -22,7 +22,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'details';
 $id = isset($_GET['id']) ? intval($_GET['id']): 1;
 
 //Instanciation controller
-$controller = new VoitureController();
+$controller = new ProductController();
 
 //Routage
 /*if($action=='details'){
@@ -37,12 +37,16 @@ switch ($action) {
     case 'details':
         $controller->details($id);
         break;
-    case 'reparer':
-        $controller->reparer($id);
+    case 'create':
+        $controller->create($id);
         break;
-    case 'panne':
-        $controller->enPanne($id);
+    case 'update':
+        $controller->update($id);
         break;
+    case 'delete':
+        $controller->delete($id);
+        break;
+
     default :
         echo "Action n'existe pas";
 }
