@@ -15,7 +15,7 @@ class Database
     private function __construct(){
         // configuration BDD
         $host = "localhost";
-        $dbname = "auto";
+        $dbname = "mytech";
         $user = "root";
         $password = "";
 

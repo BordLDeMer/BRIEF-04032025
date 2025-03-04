@@ -17,25 +17,25 @@ class VoitureController {
 
     public function details($id){
         // Chargement de la voiture
-        $voiture = Voiture::loadById($id);
+        $product = Product::loadById($id);
 
-        if(!$voiture){
-            echo "Voiture non trouvée";
+        if(!$product){
+            echo "Produit non trouvée";
             return;
         }
 
         // Inclusion de la vue
-        include __DIR__ . "/../views/voituresDetails.php";
+        include __DIR__ . "/../views/ProductDetails.php";
     }
 
 //----------------------------------------------------------------------------------------------------------------------
 // réparation Voiture -BB
     public function reparer($id){
         // Chargement de la voiture
-        $voiture = Voiture::loadById($id);
+        $product = Product::loadById($id);
 
-        if(!$voiture){
-            echo "Voiture non trouvée";
+        if(!$product){
+            echo "Produit non trouvée";
             return;
         }
         // Créer une nouvelle instance de mécanicien
@@ -45,7 +45,7 @@ class VoitureController {
         $message = $mecanicien->reparerVoiture($voiture);
 
         // Inclusion de la vue
-        include __DIR__ . '/../views/voituresDetails.php';
+        include __DIR__ . '/../views/ProductDetails.php';
     }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -63,5 +63,5 @@ class VoitureController {
         // Facultatif : On peut passer un message à la vue
     $message = $mecanicien->declarerPanne($voiture);
         // Inclusion de la vue
-        include __DIR__ . "/../views/voituresDetails.php";
+        include __DIR__ . "/../views/ProductDetails.php";
     }}
