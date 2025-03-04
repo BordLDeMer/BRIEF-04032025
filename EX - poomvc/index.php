@@ -35,10 +35,10 @@ $controller = new ProductController();
 
 switch ($action) {
     case 'details':
-        $controller->details($id);
+        $controller->details();
         break;
     case 'create':
-        $controller->create($id);
+        $controller->create();
         break;
     case 'update':
         $controller->update($id);

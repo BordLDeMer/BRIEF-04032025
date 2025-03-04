@@ -5,7 +5,6 @@
 // son but est de récupérer les données et d'inclure la vue
 
 require_once __DIR__ . "/../models/Product.php";
-require_once __DIR__ . "/../models/Vendeur.php";
 
 class ProductController
 {
@@ -16,10 +15,10 @@ class ProductController
      * @param int $id
      */
 
-    public function details($id)
+    public function details()
     {
         // Chargement du pdt
-        $product = Product::loadById($id);
+        $product = Product::lister();
 
         if (!$product) {
             echo "Produit non trouvé";
@@ -32,23 +31,10 @@ class ProductController
 
 //----------------------------------------------------------------------------------------------------------------------
 // Creation Produit -BB
-    public function create($id)
+    public function create()
     {
-        // Chargement du produit
-        $product = Product::loadById($id);
-
-        if (!$product) {
-            echo "Produit non en rayon";
-            return;
-        }
-        // Créer une nouvelle instance de vendeur
-        $vendeur = new Vendeur('Joshue');
-
-        // vendeur rentre le pdt
-        $message = $vendeur->create($product);
-
-        // Inclusion de la vue
-        include __DIR__ . '/../views/ProductDetails.php';
+        Product::create($_POST["name"], $_POST["prix"], $_POST["quantite"]);
+        header("Location: index.php");
     }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -62,28 +48,34 @@ class ProductController
             echo "produit non en rayon";
             return;
         }
-        // Créer une nouvelle instance de vendeur
-        $vendeur = new Vendeur('Sephiroth');
-        // Facultatif : On peut passer un message à la vue
-        $message = $vendeur->delete($product);
-        // Inclusion de la vue
-        include __DIR__ . "/../views/ProductDetails.php";
+        if ($_POST["conf"] === "Supprimer"){
+            Product::delete($id);
+            header("Location: index.php");
+            exit();
+        } else {
+            header("Location: views/Sup.php?msg=Confirmation ratee : Mauvaise orthographe&id=" . $_GET['id']);
+            exit();
+        }
     }
 //----------------------------------------------------------------------------------------------------------------------
 // Mettre à jour le produit
 
     public function update($id)
     {
-
-        // Créer une nouvelle instance de vendeur
-        $vendeur = new Vendeur('Mao');
         // Chargement du produit
         $product = Product::loadById($id);
 
-        // vendeur met à jour le pdt
-        $message = $vendeur->update($product);
+        if (!$product) {
+            echo "produit non en rayon";
+            return;
+        }
 
-        // Inclusion de la vue
-        include __DIR__ . "/../views/ProductDetails.php";
+        $name = !empty($_POST["name"]) ? trim($_POST["name"]) : $product->getNom();
+        $prix = !empty($_POST["prix"]) ? floatval($_POST["prix"]) : $product->getPrix();
+        $quantite = !empty($_POST["quantite"]) ? intval($_POST["quantite"]) : $product->getStock();
+
+        Product::update($id, $name, $prix, $quantite);
+
+        header("Location: index.php");
     }
 }
