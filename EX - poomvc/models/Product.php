@@ -1,3 +1,5 @@
+<link href="/BRIEF-04032025/EX - poomvc/css/crudintro.css" rel="stylesheet" />
+
 <?php
 require_once 'Database.php';
 class Product {
